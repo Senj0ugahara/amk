@@ -1,0 +1,25 @@
+.feedback {
+  margin-bottom: 40px;
+  
+  &-form {
+    padding: 40px 0;
+    background: #EEF9FF;
+    border-radius: 15px;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  &__subtitle {
+    max-width: 620px;
+    margin: 0 auto 54px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #393939;
+  }
+}
