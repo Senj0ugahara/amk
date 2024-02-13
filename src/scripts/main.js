@@ -24,24 +24,26 @@ const openMobileMenu = () => {
   })
 }
 
-const showMoreMembers = () => {
-  const membersItems = Array.from(document.querySelectorAll('.members-item'));
-  const btnShow = document.querySelector('.members__show-more');
-
-  function hiddenMembers() {
-    for (let i = 6; i < membersItems.length; i++) {
-      membersItems[i].style.display = 'none';
+if (window.clientWidth > 480) {
+  const showMoreMembers = () => {
+    const membersItems = Array.from(document.querySelectorAll('.members-item'));
+    const btnShow = document.querySelector('.members__show-more');
+  
+    function hiddenMembers() {
+      for (let i = 6; i < membersItems.length; i++) {
+        membersItems[i].style.display = 'none';
+      }
+    }
+    hiddenMembers();
+  
+    btnShow.addEventListener('click', showMoreMembers)
+  
+    function showMoreMembers() {
+      membersItems.forEach(membersItem => {
+        membersItem.style.display = 'block';
+      })
     }
   }
-  hiddenMembers();
-
-  btnShow.addEventListener('click', showMoreMembers)
-
-  function showMoreMembers() {
-    membersItems.forEach(membersItem => {
-      membersItem.style.display = 'block';
-    })
-  }
+  
+  showMoreMembers()
 }
-
-showMoreMembers()
