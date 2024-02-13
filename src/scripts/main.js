@@ -1,7 +1,14 @@
 window.addEventListener('DOMContentLoaded', function() {
   scrollingPage();
   openMobileMenu();
+  showMoreMembers();
+  showMoreAdvantages();
 })
+
+window.addEventListener('resize', function() {
+  showMoreMembers();
+  showMoreAdvantages();
+}, true);
 
 const scrollingPage = () => {
   const header = document.querySelector('.header');
@@ -24,26 +31,56 @@ const openMobileMenu = () => {
   })
 }
 
-if (window.clientWidth > 480) {
-  const showMoreMembers = () => {
-    const membersItems = Array.from(document.querySelectorAll('.members-item'));
-    const btnShow = document.querySelector('.members__show-more');
+const showMoreMembers = () => {
+  const membersItems = document.querySelectorAll('.members-item[data-hidden]');
+  const memberBtnShowMore = document.querySelector('.members__show-more');
+
+  if (window.innerWidth <= 480) {
+    memberBtnShowMore.addEventListener('click', showMore);
   
-    function hiddenMembers() {
-      for (let i = 6; i < membersItems.length; i++) {
-        membersItems[i].style.display = 'none';
+    function hiddenItems() {
+      membersItems.forEach(membersItem => membersItem.classList.add('hidden'));
+      memberBtnShowMore.textContent = `Показать еще (${membersItems.length})`;
+    }
+    hiddenItems();
+  
+    function showMore() {
+      if (memberBtnShowMore.textContent != 'Скрыть') {
+        membersItems.forEach(membersItem => membersItem.classList.toggle('hidden'));
+        memberBtnShowMore.textContent = 'Скрыть';
+      } else {
+        membersItems.forEach(membersItem => membersItem.classList.toggle('hidden'));
+        memberBtnShowMore.textContent = `Показать еще (${membersItems.length})`;
       }
     }
-    hiddenMembers();
-  
-    btnShow.addEventListener('click', showMoreMembers)
-  
-    function showMoreMembers() {
-      membersItems.forEach(membersItem => {
-        membersItem.style.display = 'block';
-      })
-    }
+  } else {
+    membersItems.forEach(membersItem => membersItem.classList.remove('hidden'));
   }
+}
+
+const showMoreAdvantages = () => {
+  const advantagesItems = document.querySelectorAll('.advantages-item[data-hidden]');
+  const advantagesBtnShowMore = document.querySelector('.advantages__show-more');
   
-  showMoreMembers()
+  if (window.innerWidth <= 480) {
+    advantagesBtnShowMore.addEventListener('click', showMore);
+  
+    function hiddenItems() {
+      advantagesItems.forEach(membersItem => membersItem.classList.add('hidden'));
+      advantagesBtnShowMore.textContent = `Показать еще (${advantagesItems.length})`;
+    }
+    hiddenItems();
+  
+    function showMore() {
+      if (advantagesBtnShowMore.textContent != 'Скрыть') {
+        advantagesItems.forEach(membersItem => membersItem.classList.toggle('hidden'));
+        advantagesBtnShowMore.textContent = 'Скрыть';
+      } else {
+        advantagesItems.forEach(membersItem => membersItem.classList.toggle('hidden'));
+        advantagesBtnShowMore.textContent = `Показать еще (${advantagesItems.length})`;
+      }
+    }
+  } else {
+    advantagesItems.forEach(membersItem => membersItem.classList.remove('hidden'));
+  }
 }
