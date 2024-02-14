@@ -43,6 +43,7 @@ const openMobileMenu = () => {
   burger.addEventListener('click', () => {
     burger.querySelector('.header-burger__line').classList.toggle('is-open');
     nav.classList.toggle('is-open');
+    document.body.classList.toggle('scroll-disable');
   })
 }
 
@@ -101,7 +102,7 @@ const showMoreAdvantages = () => {
 }
 
 const smoothScroll = () => {
-  document.querySelectorAll('.nav-item__link').forEach(link => {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function (e) {
         e.preventDefault();
         let href = this.getAttribute('href').substring(1);
