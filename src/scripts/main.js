@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', function() {
 })
 
 window.addEventListener('resize', function() {
+  scrollingPage();
   showMoreMembers();
   showMoreAdvantages();
 }, true);
@@ -14,10 +15,23 @@ window.addEventListener('resize', function() {
 const scrollingPage = () => {
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 147) {
-      header.classList.add('is-scrolling');
-    } else {
-      header.classList.remove('is-scrolling');
+    if (window.innerWidth > 960) {
+      if (window.scrollY > 147) {
+        header.querySelector('.header-main').classList.add('is-scrolling');
+        header.style.height = '147px';
+      } else {
+        header.querySelector('.header-main').classList.remove('is-scrolling');
+        header.style.height = 'auto';
+      }
+    }
+    if (window.innerWidth <= 960) {
+      if (window.scrollY > 112) {
+        header.querySelector('.header-main').classList.add('is-scrolling');
+        header.style.height = '112px';
+      } else {
+        header.querySelector('.header-main').classList.remove('is-scrolling');
+        header.style.height = 'auto';
+      }
     }
   })
 }
