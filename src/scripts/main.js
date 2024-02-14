@@ -3,6 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
   openMobileMenu();
   showMoreMembers();
   showMoreAdvantages();
+  smoothScroll();
 })
 
 window.addEventListener('resize', function() {
@@ -13,7 +14,7 @@ window.addEventListener('resize', function() {
 const scrollingPage = () => {
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
+    if (window.scrollY > 147) {
       header.classList.add('is-scrolling');
     } else {
       header.classList.remove('is-scrolling');
@@ -83,4 +84,22 @@ const showMoreAdvantages = () => {
   } else {
     advantagesItems.forEach(membersItem => membersItem.classList.remove('hidden'));
   }
+}
+
+const smoothScroll = () => {
+  document.querySelectorAll('.nav-item__link').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        let href = this.getAttribute('href').substring(1);
+        const scrollTarget = document.getElementById(href);
+        const topOffset = document.querySelector('.header').offsetHeight;
+        const elementPosition = scrollTarget.getBoundingClientRect().top;
+        const offsetPosition = elementPosition - topOffset;
+
+        window.scrollBy({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    });
+  });
 }
